@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
     Button,
@@ -14,8 +13,8 @@ import {
     createNavigationContainer,
     SafeAreaView,
     TabRouter,
-    addNavigationHelpers,
-} from 'react-navigation';
+    addNavigationHelpers
+} from 'react-navigation'
 import SampleText from './SampleText';
 
 const MyNavScreen = ({ navigation, banner }) => (
@@ -44,13 +43,13 @@ const MySettingsScreen = ({ navigation }) => (
     <MyNavScreen banner="Settings Screen" navigation={navigation} />
 );
 
-const CustomTabBar = ({ navigation }) => {
-    const { routes } = navigation.state;
-    return (
-        <SafeAreaView style={styles.tabContainer}>
-            {routes.map(route => (
+const CustomTabBar = ({navigation}) => {
+    const {routes} = navigation.state;
+    return(
+        <SafeAreaView  style={styles.tabContainer}  >
+            {routes.map(route=>(
                 <TouchableOpacity
-                    onPress={() => navigation.navigate(route.routeName)}
+                    onPress={()=>{navigation.navigate(route.routeName)}}
                     style={styles.tab}
                     key={route.routeName}
                 >
@@ -58,49 +57,47 @@ const CustomTabBar = ({ navigation }) => {
                 </TouchableOpacity>
             ))}
         </SafeAreaView>
-    );
+    )
 };
 
-const CustomTabView = ({ router, navigation }) => {
-    const { routes, index } = navigation.state;
+const CustomTabView = ({router, navigation}) => {
+    const {routes,index} = navigation.state;
     const ActiveScreen = router.getComponentForRouteName(routes[index].routeName);
-    return (
-        <SafeAreaView forceInset={{ top: 'always' }}>
-            <CustomTabBar navigation={navigation} />
-            <ActiveScreen
-                navigation={addNavigationHelpers({
-          dispatch: navigation.dispatch,
-          state: routes[index],
-        })}
-            />
+    return(
+        <SafeAreaView forceInset={{top:'always'}}>
+            <CustomTabBar navigation={navigation}/>
+            <ActiveScreen navigation={addNavigationHelpers({
+                dispatch:navigation.dispatch,
+                state:routes[index]
+            })}/>
         </SafeAreaView>
-    );
+    )
 };
 
 const CustomTabRouter = TabRouter(
     {
-        Home: {
-            screen: MyHomeScreen,
-            path: '',
+        Home:{
+            screen:MyHomeScreen,
+            path:''
         },
-        Notifications: {
-            screen: MyNotificationsScreen,
-            path: 'notifications',
+        Notifications:{
+            screen:MyNotificationsScreen,
+            path:'notifications'
         },
-        Settings: {
-            screen: MySettingsScreen,
+        Settings:{
+            screen:MySettingsScreen,
             path: 'settings',
-        },
+        }
     },
     {
-        // Change this to start on a different tab
-        initialRouteName: 'Home',
-    }
-);
+        initialRouteName:'Home'
+    });
 
 const CustomTabs = createNavigationContainer(
     createNavigator(CustomTabRouter)(CustomTabView)
 );
+
+export default CustomTabs;
 
 const styles = StyleSheet.create({
     tabContainer: {
@@ -117,5 +114,3 @@ const styles = StyleSheet.create({
         borderRadius: 4,
     },
 });
-
-export default CustomTabs;

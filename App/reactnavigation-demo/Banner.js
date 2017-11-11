@@ -1,15 +1,21 @@
-import React from 'react';
-import {Image, Platform, StyleSheet, Text, View} from 'react-native';
-import {SafeAresView} from 'react-navigation';
 
-const Banner = () => {
-    <SafeAresView style={styles.bannerContainer} forceInset={{vertical:'never'}}>
+import React from 'react';
+
+import { Image, Platform, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+
+const Banner = () => (
+    <SafeAreaView
+        style={styles.bannerContainer}
+        forceInset={{ vertical: 'never' }}
+    >
         <View style={styles.banner}>
             <Image source={require('./assets/NavLogo.png')} style={styles.image} />
             <Text style={styles.title}>React Navigation Examples</Text>
         </View>
-    </SafeAresView>
-}
+    </SafeAreaView>
+);
+
 export default Banner;
 
 const styles = StyleSheet.create({
@@ -34,6 +40,4 @@ const styles = StyleSheet.create({
         color: '#fff',
         margin: 8,
     },
-})
-
-
+});
