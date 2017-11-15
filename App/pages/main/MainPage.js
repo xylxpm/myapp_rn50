@@ -3,6 +3,8 @@ import {
     StyleSheet,
     Text,
     View,
+    ScrollView,
+    SafeAreaView,
     Image,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -11,7 +13,7 @@ import colors from '../../../App/util/Colors';
 
 class MainPage extends Component {
 
-    static navigationOptions = ({navigation,screenProps}) => ({
+    static navigationOptions = ({navigation, screenProps}) => ({
         title: '喵主页',
         headerLeft: (<Ionicons
             name={'ios-contact'}
@@ -41,9 +43,12 @@ class MainPage extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text>主页</Text>
-            </View> );
+            <ScrollView style={styles.container}>
+                <SafeAreaView forceInset={{ top: 'always' }}>
+                    <Text>主页</Text>
+                </SafeAreaView>
+            </ScrollView>
+        )
     }
 }
 
